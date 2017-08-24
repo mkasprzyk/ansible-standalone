@@ -6,7 +6,7 @@ install:
 script:
   - ln -s $(which ansible)
   - pyinstaller ansible.spec
-  - ./build/ansible --version
+  - ./dist/ansible --version
 
 
 deploy:
