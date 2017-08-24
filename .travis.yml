@@ -1,13 +1,22 @@
+sudo: required
+
+services:
+  - docker
+
 language: python
+
 python:
   - "2.7"
+
 install:
   - pip install -r requirements.txt
+
 script:
   - ln -s $(which ansible)
   - pyinstaller ansible.spec
   - ./dist/ansible --version
-
+  - docker build -t ansible-standalone .
+  - docker run ansible-standalone 
 
 deploy:
   provider: releases
