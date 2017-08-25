@@ -25,6 +25,7 @@ deploy:
   provider: releases
   api_key:
     secure: "S8a7NGQjPJaHu6mBIiFctC/oK1b32tylgBOz7x/H7L/Xbgkai3AbJfTn3r1jOh/RiGjjlr5b5zIcyGWFbtseg+ROQkORYneD5l19UjRaFIRMBDIHCUKcToJL3xkUu1Dm3rZo31CpbISvbIex2yown+GVlKAWUawqDiNf1pEZzztQPT54NgZcRE5NVsGaCCuiWoB6C10wrrlaDg4rcAhZkXON9oGTd+trXK3aEBN2JVP/lixuCa2eNWVt5ihg5qyf4BqB9pBZvG8jvwOx6wW0duO/M9C8jlPMl9AqBg+K0J3y22NJ01aesPb+8SYhUBNBQER4xpetNm8fa732qusdo81szjipLURDT1oOOaAo0s3UhBa+GgqHqbhhOCYfGBlKG6LaHRjZMbLg+5eUWeSL4Ivy0rpBmUCoR2jeBqAu/8AsP4EAw+omyLIhCI7r1kx1k/hbUxsELb9JFCDRMwb4hFpLDAao2x+v7RC6Z2O5h2Li4vBBeig1e44s9pfsGUI+99JZ900sUPK5tjgIvljK3gBZ4ke8/siuC6W36vCaXCStA/2LwkVTfXr2qb05G/U5Nsg/cwa5EAq3JDUHLxidEZ0NhWEiWalwATVDr/Wexr9/XF2nWKZgCtGdheuR5SmCGbhsAmbInWDNltInGwL4dIindb7Yfch3uQKdL1n8L4E="
+  file_glob: true
   file: "$TRAVIS_BUILD_DIR/dist/ansible*"
   skip_cleanup: true
   on:
