@@ -1,9 +1,13 @@
 # -*- mode: python -*-
-import os
-import six
-import ansible
 from ansible import plugins
 from ansible import playbook
+import ansible
+import sys
+import six
+import os
+
+sys.path.append(os.path.join(os.getcwd()))
+from utils import get_ansible_plugins_modules
 
 block_cipher = None
 
@@ -11,6 +15,8 @@ if six.__file__.endswith('pyc'):
     six_dependency = six.__file__[:-1]
 else:
     six_dependency = six.__file__
+
+plugin_modules = get_ansible_plugins_modules()
 
 a = Analysis(['ansible-playbook'],
              pathex=None,
@@ -22,39 +28,23 @@ a = Analysis(['ansible-playbook'],
                (os.path.dirname(playbook.__file__), 'ansible/playbook')
              ],
              hiddenimports=[
-              'ConfigParser',
-              'ansible.cli.adhoc',
-              'ansible.cli.playbook',
-              'ansible.vars',
-              'winrm',
-              'ansible.playbook',
-              'ansible.plugins.cache.base',
-              'ansible.plugins.action',
-              'ansible.plugins.action.copy',
-              'ansible.plugins.cache',
-              'ansible.plugins.callback',
-              'ansible.plugins.connection',
-              'ansible.plugins.filter',
-              'ansible.plugins.lookup',
-              'ansible.plugins.shell',
-              'ansible.plugins.shell.sh',
-              'ansible.plugins.strategy',
-              'ansible.plugins.terminal',
-              'ansible.plugins.test',
-              'ansible.plugins.vars',
-              'ansible.compat.selectors',
-              'ansible.modules',
-              'ansible.plugins.lookup',
-              'ansible.plugins.callback.default',
-              'ansible.module_utils.urls',
               'ansible.parsing.yaml.dumper',
+              'ansible.module_utils.urls',
+              'ansible.compat.selectors',
               'ansible.utils.hashing',
               'ansible.utils.unicode',
+              'ansible.cli.playbook',
+              'ansible.cli.adhoc',
+              'ansible.playbook',
+              'logging.handlers',
+              'ansible.modules',
+              'ansible.vars',
+              'ConfigParser',
+              'smtplib',
+              'winrm',
               'yaml',
               'crypt',
-              'smtplib',
-              'logging.handlers',
-             ],
+             ] + plugin_modules,
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
              cipher=block_cipher)

@@ -1,8 +1,12 @@
 # -*- mode: python -*-
-import os
-import six
-import ansible
 from ansible import plugins
+import ansible
+import six
+import sys
+import os
+
+sys.path.append(os.path.join(os.getcwd()))
+from utils import get_ansible_plugins_modules
  
 block_cipher = None
 
@@ -10,6 +14,8 @@ if six.__file__.endswith('pyc'):
     six_dependency = six.__file__[:-1]
 else:
     six_dependency = six.__file__
+
+plugin_modules = get_ansible_plugins_modules()
 
 a = Analysis(['ansible'],
              pathex=None,
@@ -20,33 +26,21 @@ a = Analysis(['ansible'],
                (os.path.dirname(plugins.__file__), 'ansible/plugins')
              ],
              hiddenimports=[
-              'ConfigParser',
-              'ansible.cli.adhoc',
-              'ansible.vars',
-              'winrm',
-              'ansible.plugins.cache.base',
-              'ansible.plugins.action',
-              'ansible.plugins.cache',
-              'ansible.plugins.callback',
-              'ansible.plugins.connection',
-              'ansible.plugins.filter',
-              'ansible.plugins.lookup',
-              'ansible.plugins.shell',
-              'ansible.plugins.strategy',
-              'ansible.plugins.terminal',
-              'ansible.plugins.test',
-              'ansible.plugins.vars',
-              'ansible.modules',
-              'ansible.plugins.lookup',
               'ansible.plugins.callback.default',
-              'ansible.module_utils.urls',
               'ansible.parsing.yaml.dumper',
+              'ansible.module_utils.urls',
+              'ansible.plugins.lookup',
               'ansible.utils.hashing',
               'ansible.utils.unicode',
-              'crypt',
-              'smtplib',
+              'ansible.cli.adhoc',
               'logging.handlers'
-             ],
+              'ansible.modules',
+              'ansible.vars',
+              'ConfigParser',
+              'smtplib',
+              'crypt',
+              'winrm',
+             ] + plugin_modules,
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
              cipher=block_cipher)
