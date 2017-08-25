@@ -1,9 +1,5 @@
 sudo: required
 
-env:
-  matrix:
-    - OS_TYPE=centos OS_VERSION=6
-
 services:
   - docker
 
@@ -19,6 +15,8 @@ script:
   - ln -s $(which ansible)
   - pyinstaller ansible.spec
   - ./dist/ansible --version
+  - pyinstaller ansible-playbook.spec
+  - ./dist/ansible-playbook --version
   - docker build -t ansible-standalone .
   - docker run ansible-standalone 
 
