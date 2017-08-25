@@ -2,6 +2,7 @@
 from ansible import plugins
 from ansible import playbook
 import ansible
+import site
 import sys
 import six
 import os
@@ -16,13 +17,21 @@ if six.__file__.endswith('pyc'):
 else:
     six_dependency = six.__file__
 
+if site.__file__.endswith('pyc'):
+    site_dependency = site.__file__[:-1]
+else:
+    site_dependency = site.__file__
+
+print(site_dependency)
+
 plugin_modules = get_ansible_plugins_modules()
 
 a = Analysis(['ansible-playbook'],
-             pathex=None,
+             pathex=['.'],
              binaries=None,
              datas=[
                (six_dependency, '.'),
+               (site_dependency, '.'),
                (os.path.dirname(ansible.__file__), 'ansible'),
                (os.path.dirname(plugins.__file__), 'ansible/plugins'),
                (os.path.dirname(playbook.__file__), 'ansible/playbook')
