@@ -1,7 +1,7 @@
 FROM centos:7
 COPY *.spec *.py requirements.txt /build/
 WORKDIR /build
-RUN yum -y install epel-release && \
+RUN yum -y install epel-release which && \
     yum -y groupinstall "Development Tools" && \
     yum -y install python-pip python-devel krb5-devel && \
     pip install -r requirements.txt && \
