@@ -1,6 +1,11 @@
-FROM registry.access.redhat.com/rhel7
-COPY ./dist/ansible ./dist/ansible-playbook /usr/local/bin/
-RUN chmod +x /usr/local/bin/ansible && chmod +x /usr/local/bin/ansible-playbook
+FROM centos:6.8
+COPY *.spec *.py requirements.txt /build/
+WORKDIR /build
+RUN yum -y install python-pip && \
+    pip install -r requirements.txt && \
+    pyinstaller ansible.spec && \
+    pyinstaller ansible-playbook.spec && \
+    cp -fr /build/ansible* /usr/local/bin && \
+    chmod +x /usr/local/bin/ansible* 
 
-CMD ansible --version && ansible-playbook --version
-
+CMD python -m SimpleHTTPServer
