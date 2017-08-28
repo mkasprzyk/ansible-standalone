@@ -16,7 +16,7 @@ script:
   #- pyinstaller ansible-playbook.spec
   #- ./dist/ansible-playbook --version
   - docker build -t ansible-standalone .
-  - docker run -d -p 8080:8080 ansible-standalone
+  - docker run --net=host -d -p 8080:8080 ansible-standalone
   - wget http://localhost:8080/dist/ansible
   - wget http://localhost:8080/dist/ansible-playbook
 
