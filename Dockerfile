@@ -3,7 +3,7 @@ COPY *.spec *.py requirements.txt /build/
 WORKDIR /build
 RUN yum -y install epel-release && \
     yum -y groupinstall "Development Tools" && \
-    yum -y install python-pip python-devel && \
+    yum -y install python-pip python-devel libkrb5-devel && \
     pip install -r requirements.txt && \
     pyinstaller ansible.spec && \
     pyinstaller ansible-playbook.spec && \
