@@ -17,8 +17,8 @@ script:
   #- ./dist/ansible-playbook --version
   - docker build -t ansible-standalone .
   - docker run --net=host -d -p 8080:8080 ansible-standalone
-  - wget http://$(hostname):8080/dist/ansible
-  - wget http://$(hostname):8080/dist/ansible-playbook
+  - wget --tries=10 http://$(hostname):8080/dist/ansible
+  - wget --tries=10 http://$(hostname):8080/dist/ansible-playbook
 
 deploy:
   provider: releases
