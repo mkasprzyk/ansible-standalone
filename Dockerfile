@@ -2,6 +2,7 @@ FROM centos:7
 COPY *.spec *.py requirements.txt /build/
 WORKDIR /build
 RUN yum -y install epel-release && \
+    yum -y groupinstall "Development Tools" && \
     yum -y install python-pip && \
     pip install -r requirements.txt && \
     pyinstaller ansible.spec && \
